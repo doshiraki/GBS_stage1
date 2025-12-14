@@ -3,7 +3,10 @@
 // ==========================================
 const GBS_CONFIG = {
   defaultPartition: 'PRD',        // Stage1のみで使用する
-  devAppTitle: 'Dual World Clock TEST' // Stage2のみで使用する
+  devAppTitle: 'Dual World Clock TEST', // Stage2のみで使用する
+  exports: {
+    ScriptProperties: PropertiesService.getScriptProperties()
+  }
 };
 
 // ==========================================
@@ -41,6 +44,10 @@ class BIOS {
       const params = (e && e.parameter) ? e.parameter : {};
       let KernelClass = null;
       let bootConfig = {};
+
+      if (this.config.exports) {
+        bootConfig = {...bootConfig, exports: this.config.exports};
+      }
 
       // 🟢 Mode 1: Stage 1 Gateway (本番環境)
       // GasPartitionTable が「存在する場合のみ」実行する安全設計
