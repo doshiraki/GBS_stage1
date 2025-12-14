@@ -76,10 +76,7 @@ class BIOS {
       // 🚀 Boot Kernel
       const kernel = new KernelClass(bootConfig);
       console.log(e);
-      const ret = kernel.run(e);
-      console.log("RPC ret:");
-      console.log(ret);
-      return ret;
+      return kernel.run(e);
 
     } catch (err) {
       // 万能版のエラーヘッダーは [BIOS Error]
